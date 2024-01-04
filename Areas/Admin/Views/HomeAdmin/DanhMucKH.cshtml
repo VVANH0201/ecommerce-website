@@ -1,0 +1,122 @@
+﻿@using BTL.Models
+@using X.PagedList.Mvc.Core
+@model X.PagedList.IPagedList<KhachHang>
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+
+@{
+    ViewData["Title"] = "DanhMucKH";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+
+@*<p>
+    <a class="mt-3 btn-success" asp-area="Admin" asp-controller="HomeAdmin" asp-action="ThemKH">Tạo mới</a>
+</p>*@
+<ul class="navbar-nav mr-lg-2 col-lg-8 m-3">
+    <li class="nav-item nav-search d-none d-lg-block">
+        <div class="input-group">
+            <input id="keyword" name="keyword" type="text" class="form-control" placeholder="Search Here..." aria-label="search" aria-describedby="search">
+        </div>
+    </li>
+</ul>
+<div class="col-lg-12 grid-margin stretch-card">
+    <div class="card">
+        <div class="card-body">
+
+            <div class="table-responsive">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>
+                                Tên Khách Hàng
+                            </th>
+                            <th>
+                                Ngày sinh
+                            </th>
+                            <th>
+                                Số Điện Thoại
+                            </th>
+                            <th>
+                                Địa Chỉ
+                            </th>
+                            
+@*                            <th></th>
+*@                        </tr>
+                    </thead>
+                    <tbody id="records_table">
+
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.TenKhachHang)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.NgaySinh)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.SoDienThoai)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.DiaChi)
+                                </td>
+                                
+@*                                <td>
+                                    <a class=" btn btn-sm btn-success" asp-action="SuaKH" asp-route-MaKhachHang="@item.MaKhachHang">Sửa</a>
+                                    <a class=" btn btn-sm btn-primary" asp-action="ChiTietKH" asp-route-MaKhachHang="@item.MaKhachHang">Chi tiết</a>
+                                    <a class="btn btn-sm btn-danger" asp-action="XoaKH" asp-route-MaKhachHang="@item.MaKhachHang">Xóa</a>
+                                </td>
+*@                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+@Html.PagedListPager(Model,page => Url.Action("DanhMucKH", new {page=page}),new X.PagedList.Web.Common.PagedListRenderOptions(){
+	LiElementClasses = new List<String> {"page-item"},
+	PageClasses = new List<String> {"page-link"}
+})
+
+@section Script{
+    <script>
+        $(document).ready(function () {
+            $("#keyword").keyup(function () {
+                var strkeyword = $('#keyword').val();
+                $.ajax({
+                    url: 'https://localhost:7229/Admin/TimKiem/FindKH/',
+                    datatype: "json",
+                    type: "POST",
+                    data: { keyword: strkeyword },
+                    async: true,
+                    success: function (results) {
+                        $('#records_table').html("");
+                        $('#records_table').html(results);
+                    },
+                    error: function (xhr) {
+                        alert('error');
+                    }
+                });
+            });
+            $("#keyword").keyup(function () {
+                var strkeyword = $('#keyword').val();
+                $.ajax({
+                    url: 'https://localhost:7229/Admin/TimKiem/FindKHSDT/',
+                    datatype: "json",
+                    type: "POST",
+                    data: { keyword: strkeyword },
+                    async: true,
+                    success: function (results) {
+                        $('#records_table').html("");
+                        $('#records_table').html(results);
+                    },
+                    error: function (xhr) {
+                        alert('error');
+                    }
+                });
+            });
+        });
+
+    </script>
+}

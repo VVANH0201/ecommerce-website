@@ -1,0 +1,95 @@
+﻿@model BTL.Models.DienThoai
+
+@{
+    ViewData["Title"] = "XoaSanPham";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+<h3>Bạn có muốn xóa không ?</h3>
+<div>
+   
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            Tên Điện Thoại
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.TenDienThoai)
+        </dd>
+        <dt class="col-sm-2">
+            RAM
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Ram)
+        </dd>
+        <dt class="col-sm-2">
+            ROM
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Rom)
+        </dd>
+        <dt class="col-sm-2">
+            PIN
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Pin)
+        </dd>
+        <dt class="col-sm-2">
+            Hệ Điều Hành
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.HeDieuHanh)
+        </dd>
+        <dt class="col-sm-2">
+            Màn Hình
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.ManHinh)
+        </dd>
+        <dt class="col-sm-2">
+            Kích Thước
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.KichThuoc)
+        </dd>
+        <dt class="col-sm-2">
+            Ảnh
+        </dt>
+        <dd class="col-sm-10">
+            <img src="@Url.Content("~/img/" + Model.Anh)" width="100px" />
+            @*@Html.DisplayFor(model => model.Anh)*@
+        </dd>
+        <dt class="col-sm-2">
+            Giá bán
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.GiaBan)
+        </dd>
+        <dt class="col-sm-2">
+            Giá Nhập
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.GiaNhap)
+        </dd>
+        <dt class="col-sm-2">
+            Số Lượng
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.SoLuong)
+        </dd>
+        <dt class="col-sm-2">
+            Thời Gian Bảo Hành
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.TgbaoHanh)
+        </dd>
+
+        
+    </dl>
+    
+    <form asp-action="XoaSanPham">
+        <input type="hidden" asp-for="MaDienThoai" />
+        <input type="submit" value="Xóa" class="btn btn-danger" />
+        <a class="btn btn-info" asp-action="DanhMucSanPham">Quay lại</a>
+    </form>
+</div>

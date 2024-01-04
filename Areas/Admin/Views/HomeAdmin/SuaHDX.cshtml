@@ -1,0 +1,46 @@
+﻿@model BTL.Models.HoaDonBan
+
+@{
+    ViewData["Title"] = "SuaHDX";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+
+<div class="col-12 grid-margin stretch-card">
+    <div class="card">
+        <div class="card-body">
+        <form method="post" asp-action="SuaHDX">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="MaHdb" />
+            <div class="form-group">
+                <label asp-for="NgayBan" class="control-label"></label>
+                <input asp-for="NgayBan" class="form-control" />
+                <span asp-validation-for="NgayBan" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label class="control-label">Tên khách hàng: </label>
+                <select asp-for="MaKhachHang" class="form-control" asp-items="ViewBag.KH"></select>
+                <span asp-validation-for="MaKhachHang" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label class="control-label">Tên nhân viên: </label>
+                <select asp-for="MaNhanVien" class="form-control" asp-items="ViewBag.NV"></select>
+                <span asp-validation-for="MaNhanVien" class="text-danger"></span>
+            </div>
+            @*<div class="form-group">
+                <label asp-for="TongTien" class="control-label"></label>
+                <input asp-for="TongTien" class="form-control" />
+                <span asp-validation-for="TongTien" class="text-danger"></span>
+            </div>*@
+            <div class="form-group">
+                <input type="submit" value="Lưu" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+</div>
+
+<div>
+    <a class="btn btn-info" asp-action="DanhMucHDX">Quay lại</a>
+</div>
+

@@ -1,0 +1,27 @@
+﻿@using BTL.Models
+@model List<UserLogin>
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@foreach (var item in Model)
+{
+        <tr>
+            <td>
+            @Html.DisplayFor(modelItem => item.UserName)
+            </td>
+            <td>
+            @Html.DisplayFor(modelItem => item.Password)
+            </td>
+            <td>
+            @Html.DisplayFor(modelItem => item.Email)
+            </td>
+
+        @if (@item.UserRole == 1)
+        {
+                    <td>
+                        Khách Hàng
+                    </td>
+        }
+
+
+            
+        </tr>
+}

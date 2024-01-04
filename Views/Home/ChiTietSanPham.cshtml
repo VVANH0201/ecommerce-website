@@ -1,0 +1,195 @@
+﻿@model BTL.ViewModels.ChiTietSanPhamViewModel
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+
+@{
+    ViewData["Title"] = "ChiTietSanPham";
+    Layout = "~/Views/Shared/_LayoutMain.cshtml";
+    var thuong = "https://localhost:7229/api/cartapi?mahang=" + @Model.DienThoai.MaDienThoai + "&quatity=";
+}
+
+<nav aria-label="breadcrumb" class="breadcrumb-nav border-0 mb-0">
+    <div class="container d-flex align-items-center">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a asp-action="Index">Home</a></li>
+            <li class="breadcrumb-item"><a asp-action="SanPhamTheoHSX" asp-route-maHsx="@Model.DienThoai.MaHsx">@Model.DienThoai.MaHsxNavigation.TenHsx</a></li>
+            <li class="breadcrumb-item active" aria-current="page"><a asp-controller="Home" asp-action="ChiTietSanPham" asp-route-maDienThoai="@Model.DienThoai.MaDienThoai">@Model.DienThoai.TenDienThoai</a></li>
+        </ol>
+    </div><!-- End .container -->
+</nav><!-- End .breadcrumb-nav -->
+
+<div class="page-content">
+    <div class="container">
+        <div class="product-details-top">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="product-gallery product-gallery-vertical">
+                        <div class="row">
+                            <figure class="product-main-image">
+                                <img id="product-zoom" src="@Url.Content("../img/" + Model.DienThoai.Anh)" data-zoom-image="@Url.Content("../img/" + Model.DienThoai.Anh)" alt="product image">
+                                <a href="#" id="btn-product-gallery" class="btn-product-gallery">
+                                    <i class="icon-arrows"></i>
+                                </a>
+                            </figure><!-- End .product-main-image -->
+
+                            <div id="product-zoom-gallery" class="product-image-gallery">
+                                @foreach (var item in ViewBag.Images)
+                                {
+                                    <a class="product-gallery-item active" data-image="@Url.Content("../img/" + item.TenFileAnh)" data-zoom-image="@Url.Content("../img/" + item.TenFileAnh)">
+                                        <img data-imgbigurl="@Url.Content("../img/" + item.TenFileAnh)" src="@Url.Content("../img/" + item.TenFileAnh)" alt="product side">
+                                    </a>
+                                }
+                            </div><!-- End .product-image-gallery -->
+                        </div><!-- End .row -->
+                    </div><!-- End .product-gallery -->
+                </div><!-- End .col-md-6 -->
+
+                <div class="col-md-6">
+                    <div class="product-details">
+                        <h1 class="product-title"> @Html.DisplayFor(x => x.DienThoai.TenDienThoai) </h1><!-- End .product-title -->
+
+                        <div class="ratings-container">
+                            @*<div class="ratings">
+                                <div class="ratings-val" style="width: 80%;"></div><!-- End .ratings-val -->
+                            </div><!-- End .ratings -->*@
+                            <a class="ratings-text" href="#product-review-link" id="review-link"> @ViewBag.Count Reviews </a>
+                        </div><!-- End .rating-container -->
+
+                        <div class="product-price">
+                            @Html.DisplayFor(x => x.DienThoai.GiaBan) đ
+                        </div><!-- End .product-price -->
+
+                        <div class="details-filter-row details-row-size">
+                            <label for="qty">Quantity:</label>
+                            <div class="product-details-quantity">
+                                <input type="number" id="qty" class="form-control" value="1" min="1" max="10" step="1" data-decimals="0" required>
+                            </div><!-- End .product-details-quantity -->
+                        </div><!-- End .details-filter-row -->
+
+                        <div class="product-details-action">
+                            <a onclick="addToCart('@thuong')" class="btn-product btn-cart"><span>add to cart</span></a>
+                        </div><!-- End .product-details-action -->
+
+                        <div class="product-details-footer">
+
+                            <div class="social-icons social-icons-sm">
+                                <span class="social-label">Share:</span>
+                                <a href="#" class="social-icon" title="Facebook" target="_blank"><i class="icon-facebook-f"></i></a>
+                                <a href="#" class="social-icon" title="Twitter" target="_blank"><i class="icon-twitter"></i></a>
+                                <a href="#" class="social-icon" title="Instagram" target="_blank"><i class="icon-instagram"></i></a>
+                                <a href="#" class="social-icon" title="Pinterest" target="_blank"><i class="icon-pinterest"></i></a>
+                            </div>
+                        </div><!-- End .product-details-footer -->
+                    </div><!-- End .product-details -->
+                </div><!-- End .col-md-6 -->
+            </div><!-- End .row -->
+        </div><!-- End .product-details-top -->
+
+        <div class="product-details-tab">
+            <ul class="nav nav-pills justify-content-center" role="tablist">
+                <li class="nav-item">
+                    <a class="nav-link active" id="product-desc-link" data-toggle="tab" href="#product-desc-tab" role="tab" aria-controls="product-desc-tab" aria-selected="true">Description</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" id="product-shipping-link" data-toggle="tab" href="#product-shipping-tab" role="tab" aria-controls="product-shipping-tab" aria-selected="false">Shipping & Returns</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" id="product-review-link" data-toggle="tab" href="#product-review-tab" role="tab" aria-controls="product-review-tab" aria-selected="false">Reviews (@ViewBag.Count)</a>
+                </li>
+            </ul>
+            <div class="tab-content">
+                <div class="tab-pane fade show active" id="product-desc-tab" role="tabpanel" aria-labelledby="product-desc-link">
+                    <div class="product-desc-content">
+                        <h3>Product Information</h3>
+                        <p> @Html.DisplayFor(x => x.DienThoai.TenDienThoai) </p>
+                        <ul>
+                            <li> @Html.DisplayNameFor(x => x.DienThoai.Ram): @Html.DisplayFor(x => x.DienThoai.Ram) </li>
+                            <li> @Html.DisplayNameFor(x => x.DienThoai.Rom): @Html.DisplayFor(x => x.DienThoai.Rom)</li>
+                            <li> @Html.DisplayNameFor(x => x.DienThoai.Pin): @Html.DisplayFor(x => x.DienThoai.Pin) </li>
+                            <li> @Html.DisplayNameFor(x => x.DienThoai.HeDieuHanh): @Html.DisplayFor(x => x.DienThoai.HeDieuHanh) </li>
+                            <li> @Html.DisplayNameFor(x => x.DienThoai.KichThuoc): @Html.DisplayFor(x => x.DienThoai.KichThuoc) </li>
+                            <li> @Html.DisplayNameFor(x => x.DienThoai.TgbaoHanh): @Html.DisplayFor(x => x.DienThoai.TgbaoHanh) months</li>
+                        </ul>
+                    </div><!-- End .product-desc-content -->
+                </div><!-- .End .tab-pane -->
+                <div class="tab-pane fade" id="product-shipping-tab" role="tabpanel" aria-labelledby="product-shipping-link">
+                    <div class="product-desc-content">
+                        <h3>Delivery & returns</h3>
+                        <p>
+                            Our genuine products are sold on all online and offline stores. Our store supports shipping to all provinces and cities across the country.
+                            In addition, if the product is delivered to you, please contact us via a hotline: 0123456789.
+                        </p>
+                    </div><!-- End .product-desc-content -->
+                </div><!-- .End .tab-pane -->
+                <div class="tab-pane fade" id="product-review-tab" role="tabpanel" aria-labelledby="product-review-link">
+                    <div class="reviews">
+                        <h3>Reviews(@ViewBag.Count)</h3>
+                        <h3>Comments</h3>
+
+                        <div class="review">
+                            <div class="row no-gutters">
+                                <form asp-action="AddComment" method="post">
+                                    <div>
+                                        <label>Username:</label>
+                                        <input name="username" value="@ViewBag.Username" type="text" class="form-control" id="cname" placeholder="Name *" required="" disabled />
+                                    </div>
+                                    <div>
+                                        <input type="text" name="mdt" value="@ViewBag.MaDT" style="display:none;" />
+                                    </div>
+                                    <div>
+                                        <label>Content:</label>
+                                        <textarea name="content" class="form-control" cols="30" rows="4" id="cmessage" required="" placeholder="Content *"></textarea>
+                                    </div>
+                                    <button type="submit" class="btn btn-outline-primary-2 btn-minwidth-sm">
+                                        <span>Add Comment</span>
+                                        <i class="icon-long-arrow-right"></i>
+                                    </button>
+                                </form>
+                            </div>
+                        </div>
+                        <ul>
+                            @foreach (var comment in Model.DienThoai.Comments)
+                            {
+                                <div class="review">
+                                    <div class="row no-gutters">
+                                        <div class="col-auto">
+                                            <h4><a href="#">@comment.UserName</a></h4>
+                                            <h4><a href="#">@comment.MaDienThoai</a></h4>
+                                            <span class="review-date">@comment.CreatedTime</span>
+                                        </div><!-- End .col -->
+                                        <div class="col">
+                                            <!--<h4>Very good</h4>-->
+                                            <div class="review-content">
+                                                <p>@comment.NdbinhLuan</p>
+                                            </div><!-- End .review-content -->
+                                            <!-- End .review-action -->
+                                        </div><!-- End .col-auto -->
+                                    </div><!-- End .row -->
+                                </div>
+                            }
+                        </ul>
+                    </div><!-- End .reviews -->
+                </div><!-- .End .tab-pane -->
+            </div><!-- End .tab-content -->
+        </div><!-- End .product-details-tab -->
+    </div><!-- End .container -->
+</div><!-- End .page-content -->
+
+@section Script{
+<script>
+    function addToCart(getUrl) {
+        var sl = document.getElementById("qty").value;
+        $.ajax({
+            type: 'Post',
+                url: getUrl + sl,
+            dataType: 'json',
+            success: function (data) {
+                alert("Thêm thành công!")
+            },
+            Error: function (xhr) {
+                alert(xhr.responseText)
+            }
+        });
+        console.log(sl);
+    }
+</script>
+}

@@ -1,0 +1,195 @@
+﻿
+@{
+    ViewData["Title"] = "Cart";
+    Layout = "~/Views/Shared/_LayoutMain.cshtml";
+}
+
+<main class="main">
+	<div class="page-header text-center" style="background-image: url('../molla/images/page-header-bg.jpg')">
+		<div class="container">
+			<h1 class="page-title">Shopping Cart<span>Shop</span></h1>
+		</div><!-- End .container -->
+	</div><!-- End .page-header -->
+	<nav aria-label="breadcrumb" class="breadcrumb-nav">
+		<div class="container">
+			<ol class="breadcrumb">
+				<li class="breadcrumb-item"><a asp-action="Index">Home</a></li>
+				<li class="breadcrumb-item"><a asp-action="Cart">Your Cart</a></li>
+			</ol>
+		</div><!-- End .container -->
+	</nav><!-- End .breadcrumb-nav -->
+
+	<div class="page-content">
+		<div class="cart">
+			<div class="container">
+				<div class="row">
+					<div class="col-lg-9">
+						<table class="table table-cart table-mobile">
+							<thead>
+								<tr>
+									<th>Product</th>
+									<th>Price</th>
+									<th>Quantity</th>
+									<th>Total</th>
+									<th></th>
+								</tr>
+							</thead>
+
+							<tbody id="DisplayCart">
+
+							</tbody>
+						</table><!-- End .table table-wishlist -->
+
+					</div><!-- End .col-lg-9 -->
+					<aside class="col-lg-3">
+						<div class="summary summary-cart">
+							<h3 class="summary-title">Cart Total</h3><!-- End .summary-title -->
+
+							<table class="table table-summary">
+								<tbody>
+									<tr class="summary-subtotal">
+										<td>Subtotal:</td>
+										<td id="subtotal"></td>
+									</tr><!-- End .summary-subtotal -->
+									<tr class="summary-shipping">
+										<td>Shipping:</td>
+										<td>&nbsp;</td>
+									</tr>
+
+									<tr class="summary-shipping-row">
+										<td>
+											<div class="custom-control custom-radio">
+												<input type="radio" id="free-shipping" name="shipping" class="custom-control-input">
+												<label class="custom-control-label" for="free-shipping">Free Shipping</label>
+											</div><!-- End .custom-control -->
+										</td>
+										<td>0đ</td>
+									</tr><!-- End .summary-shipping-row -->
+									<tr class="summary-total">
+										<td>Total:</td>
+										<td id="total"></td>
+									</tr><!-- End .summary-total -->
+								</tbody>
+							</table><!-- End .table table-summary -->
+							<button id="buttoncheckout" name="delete" class="btn btn-outline-primary-2 btn-order btn-block"> PROCEED TO CHECKOUT</button>
+@*							<a id="buttoncheckout" name="delete" class="btn btn-outline-primary-2 btn-order btn-block">PROCEED TO CHECKOUT</a>
+*@						</div><!-- End .summary -->
+
+						<a asp-action="Index" class="btn btn-outline-dark-2 btn-block mb-3"><span>CONTINUE SHOPPING</span><i class="icon-refresh"></i></a>
+					</aside><!-- End .col-lg-3 -->
+				</div><!-- End .row -->
+			</div><!-- End .container -->
+		</div><!-- End .cart -->
+	</div><!-- End .page-content -->
+</main><!-- End .main -->
+
+
+@section Script{
+<script>
+	function showDT() {
+		var total = 0;
+		var str = '';
+		var urll = "https://localhost:7229/api/cartapi";
+		var tt = '';
+		$.ajax({
+			type: 'GET',
+			url: urll,
+			dataType: 'json',
+			success: function (data) {
+				$.each(data, function (key, val) {
+					total += val.total;
+					str += `<tr><td class="product-col">
+							<div class="product">
+							<figure class="product-media">
+							<a href="#">
+							<img src="../img/${val.anh}" alt="Product image">
+							</a>
+							</figure>
+							<h3 class="product-title">
+							<a href="#">${val.tenDienThoai}</a>
+							</h3><!-- End .product-title -->
+							</div><!-- End .product -->
+							</td>
+								<td class="price-col">${val.dongia}</td>
+							<td class="quantity-col">
+							<div class="cart-product-quantity">
+										<input type="number" class="form-control" value="${val.sl}" min="1" max="10" step="1" data-decimals="0" required="">
+							</div><!-- End .cart-product-quantity -->
+							</td>
+									<td class="total-col">${val.total}</td>
+										<td class="remove-col"><button id="refreshBtn" onclick="delDt('`;
+					str += "https://localhost:7229/api/cartapi?mahang=" + val.maDienThoai;
+					str += `')" class="btn-remove"><i class="icon-close"></i></button></td>
+							</tr>`;
+					tt = total;
+				});
+				console.log(total);
+				$('#DisplayCart').html(str);
+				$('#total').html(tt);
+				$('#subtotal').html(tt);
+			},
+			Error: function (xhr) {
+				alert(xhr.responseText)
+			}
+		});
+	}
+	function delDt(getUrl) {
+		$.ajax({
+			type: 'Delete',
+			url: getUrl,
+			dataType: 'json',
+			success: function (data) {
+				location.reload();
+			},
+			Error: function (xhr) {
+				alert(xhr.responseText)
+				alert("del not ok")
+			}
+		});
+	}
+	$(document).ready(function () {
+		showDT();
+	})
+	$(document).on('click', "button[name='delete']", function () {
+			var Url = 'https://localhost:7229/api/Bill';
+			$.ajax({
+				url: Url,
+				datatype: "json",
+				type: "POST",
+				
+				
+				success: function (results) {
+					if(results == true){
+						alert("Thanh Toán thành công");
+					}
+					else{
+						alert("Thất bại");
+					}
+				},
+				error: function (xhr) {
+					alert('error');
+				}
+			});
+
+			$.ajax({
+				url: Url,
+				datatype: "json",
+				type: "DELETE",
+
+
+				success: function (results) {
+					if (results == true) {
+						location.reload();
+					}
+					else {
+						alert("Thất bại");
+					}
+				},
+				error: function (xhr) {
+					alert('error');
+				}
+			});
+	
+	});
+</script>
+}

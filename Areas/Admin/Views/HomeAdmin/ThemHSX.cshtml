@@ -1,0 +1,35 @@
+﻿@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@model BTL.Models.HangSanXuat
+
+@{
+    ViewData["Title"] = "ThemHSX";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<div class="col-12 grid-margin stretch-card">
+    <div class="card">
+        <div class="card-body">
+        <form method="post" asp-action="ThemHSX">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="MaHsx" class="control-label"></label>
+                <input asp-for="MaHsx" class="form-control" />
+                <span asp-validation-for="MaHsx" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="TenHsx" class="control-label"></label>
+                <input asp-for="TenHsx" class="form-control" />
+                <span asp-validation-for="TenHsx" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Thêm mới" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+</div>
+
+<div>
+    <a class="btn btn-info" asp-action="DanhMucHSX">Quay Lại</a>
+</div>
+

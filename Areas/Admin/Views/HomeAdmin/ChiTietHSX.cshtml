@@ -1,0 +1,29 @@
+﻿@model BTL.Models.HangSanXuat
+
+@{
+    ViewData["Title"] = "ChiTietHSX";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+
+<div>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            Mã Hãng Sản Xuất
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.MaHsx)
+        </dd>
+        <dt class = "col-sm-2">
+            Tên Hãng Sản Xuất
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.TenHsx)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a class="btn btn-primary" asp-action="SuaHSX" asp-route-MaHSX="@Model?.MaHsx">Sửa</a> |
+    <a class="btn btn-info" asp-action="Index">Quay Lại</a>
+</div>

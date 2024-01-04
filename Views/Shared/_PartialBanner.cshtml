@@ -1,0 +1,101 @@
+﻿<div class="intro-section pt-3 pb-3 mb-2">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8">
+                <div class="intro-slider-container slider-container-ratio mb-2 mb-lg-0">
+                    <div class="intro-slider owl-carousel owl-simple owl-dark owl-nav-inside" data-toggle="owl" data-owl-options='{
+                                        "nav": false,
+                                        "dots": true,
+                                        "responsive": {
+                                            "768": {
+                                                "nav": true,
+                                                "dots": false
+                                            }
+                                        }
+                                    }'>
+                        <div class="intro-slide">
+                            <figure class="slide-image">
+                                <picture>
+                                    <source media="(max-width: 480px)" srcset="../img/banner_zflip3.jpg">
+                                    <img src="../img/banner_zflip3.jpg" alt="Image Desc">
+                                </picture>
+                            </figure><!-- End .slide-image -->
+
+                            <div class="intro-content">
+                                <h3 class="intro-subtitle text-primary">Newest Product</h3><!-- End .h3 intro-subtitle -->
+                                <h1 class="intro-price" style="color: white">
+                                    Samsung Galaxy <br>Z-Flip 3
+                                </h1><!-- End .intro-title -->
+
+                                <a asp-action="DienThoaiBanner" asp-route-tenSp="Samsung Galaxy Zflip 3" class="btn btn-primary btn-round">
+                                    <span>Click Here</span>
+                                    <i class="icon-long-arrow-right"></i>
+                                </a>
+                            </div><!-- End .intro-content -->
+                        </div><!-- End .intro-slide -->
+
+                        <div class="intro-slide">
+                            <figure class="slide-image">
+                                <picture>
+                                    <source media="(max-width: 480px)" srcset="../img/iphone13pro.png">
+                                    <img src="../img/iphone13pro.png" alt="Image Desc">
+                                </picture>
+                            </figure><!-- End .slide-image -->
+
+                            <div class="intro-content">
+                                <h3 class="intro-subtitle text-primary">Deals and Promotions</h3><!-- End .h3 intro-subtitle -->
+                                <h1 class="intro-title">
+                                    Apple <br>Iphone 13 Pro
+                                </h1><!-- End .intro-title -->
+
+                                <a asp-action="DienThoaiBanner" asp-route-tenSp="Iphone 13 pro" class="btn btn-primary btn-round">
+                                    <span>Click Here</span>
+                                    <i class="icon-long-arrow-right"></i>
+                                </a>
+                            </div><!-- End .intro-content -->
+                        </div><!-- End .intro-slide -->
+                    </div><!-- End .intro-slider owl-carousel owl-simple -->
+
+                    <span class="slider-loader"></span><!-- End .slider-loader -->
+                </div><!-- End .intro-slider-container -->
+            </div><!-- End .col-lg-8 -->
+
+            <div class="col-lg-4">
+                <div class="intro-banners">
+                    <div class="banner mb-lg-1 mb-xl-2">
+                        <a href="#">
+                            <img src="../img/banner_ssS20fe.png" alt="Banner" style="height: 120px">
+                        </a>
+
+                        <div class="banner-content">
+                            <h4 class="banner-subtitle d-lg-none d-xl-block"><a href="#">Top Product</a></h4><!-- End .banner-subtitle -->
+                            <h3 class="banner-title"><a asp-action="DienThoaiBanner" asp-route-tenSp="Samsung Galaxy S20 FE">Samsung Galaxy<br>S20 FE</a></h3><!-- End .banner-title -->
+                        </div><!-- End .banner-content -->
+                    </div><!-- End .banner -->
+
+                    <div class="banner mb-lg-1 mb-xl-2">
+                        <a href="#">
+                            <img src="../img/banner_ssS21s.png" alt="Banner">
+                        </a>
+
+                        <div class="banner-content">
+                            <h4 class="banner-subtitle d-lg-none d-xl-block" style="color:darkorange"><a href="#">Samsung Flagship</a></h4><!-- End .banner-subtitle -->
+                            <h3 class="banner-title" style="color:darkorange"><a asp-action="DienThoaiBanner" asp-route-tenSp="Samsung Galaxy S21">Galaxy S21 series</a></h3><!-- End .banner-title -->
+                        </div><!-- End .banner-content -->
+                    </div><!-- End .banner -->
+
+                    <div class="banner mb-0">
+                        <a href="#">
+                            <img src="../img/banner_ip11.png" alt="Banner" style="height: 130px">
+                        </a>
+
+                        <div class="banner-content">
+                            <h4 class="banner-subtitle d-lg-none d-xl-block" style="color:white"><a href="#">Featured</a></h4><!-- End .banner-subtitle -->
+                            <h3 class="banner-title" style="color:darkorange"><a asp-action="DienThoaiBanner" asp-route-tenSp="Iphone 11">Iphone 11 Series</span></a></h3><!-- End .banner-title -->
+                        </div><!-- End .banner-content -->
+                    </div><!-- End .banner -->
+                </div><!-- End .intro-banners -->
+            </div><!-- End .col-lg-4 -->
+        </div><!-- End .row -->
+    </div><!-- End .container -->
+</div><!-- End .intro-section -->

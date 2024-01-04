@@ -1,0 +1,20 @@
+﻿
+@{
+    ViewData["Title"] = "SearchProduct";
+    Layout = "~/Views/Shared/_LayoutMain.cshtml";
+}
+@model IEnumerable<DienThoai>
+
+<div class="container">
+    @await Html.PartialAsync("_PartialFilter")
+    <div class="row">
+        @foreach (var item in Model)
+        {
+            <div class="col-6 col-md-4 col-lg-4 col-xl-3">
+                <div class="product">
+                    @await Html.PartialAsync("_PartialSanPham", item)
+                </div><!-- End .product -->
+            </div>
+        }
+    </div>
+</div>

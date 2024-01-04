@@ -1,0 +1,31 @@
+﻿@using BTL.Models
+@model List<UserLogin>
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@foreach (var item in Model)
+{
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.UserName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Password)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Email)
+        </td>
+
+        @if (@item.UserRole == 0)
+        {
+            <td>
+                Nhân Viên
+            </td>
+        }
+
+
+        <td>
+            <a class="btn btn-sm btn-success" asp-controller="Admin" asp-action="SuaTK" asp-route-UserName="@item.UserName">Sửa</a>
+            @*<a asp-action="Details" asp-route-id="@item.UserName">Details</a>
+        <a asp-action="Delete" asp-route-id="@item.UserName">Delete</a>*@
+        </td>
+    </tr>
+}

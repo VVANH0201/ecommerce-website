@@ -1,0 +1,7 @@
+﻿@model IEnumerable<HangSanXuat>
+<ul>
+    @foreach (var item in Model)
+    {
+        <li><a asp-asp-controller="Home" asp-action="SanPhamTheoHSX" asp-route-maHsx="@item.MaHsx">@item.TenHsx</a></li>
+    }
+</ul>

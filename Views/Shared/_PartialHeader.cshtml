@@ -1,0 +1,307 @@
+﻿
+<header class="header header-intro-clearance header-3">
+    <div class="header-top">
+        <div class="container">
+            <div class="header-left">
+                <a href="tel:#"><i class="icon-phone"></i>Call: +0123 456 789</a>
+            </div><!-- End .header-left -->
+
+            <div class="header-right">
+
+                <ul class="top-menu">
+                    <li>
+                        <a href="#">Links</a>
+                        <ul>
+                            <li>
+                                <div class="header-dropdown">
+                                    <a href="#">English</a>
+                                    <div class="header-menu">
+                                        <ul>
+                                            <li><a href="#">Vietnamese</a></li>
+                                            <li><a href="#">English</a></li>
+                                            <li><a href="#">French</a></li>
+                                            <li><a href="#">Spanish</a></li>
+                                        </ul>
+                                    </div><!-- End .header-menu -->
+                                </div>
+                            </li>
+                            @if(ViewBag.username == null)
+                            {
+                                <li><a asp-controller="Access" asp-action="Login">Sign in / Sign up</a></li>
+                            }
+                            else
+                            {
+                                <li><a asp-controller="Access" asp-action="Logout">Sign out</a></li>
+                                <li>
+                                    <a asp-controller="Access" asp-action="SuaThongTinKhachHang">
+                                        Hello, @ViewBag.username
+                                    </a>
+                                </li>
+                            }
+                        </ul>
+                    </li>
+                </ul><!-- End .top-menu -->
+            </div><!-- End .header-right -->
+
+        </div><!-- End .container -->
+    </div><!-- End .header-top -->
+
+    <div class="header-middle">
+        <div class="container">
+            <div class="header-left">
+                <button class="mobile-menu-toggler">
+                    <span class="sr-only">Toggle mobile menu</span>
+                    <i class="icon-bars"></i>
+                </button>
+
+                <a asp-controller="Home" asp-action="Index" class="logo">
+                    <img src="../img/logo1.png" alt="Molla Logo" width="220" height="100">
+                </a>
+            </div><!-- End .header-left -->
+
+            <div class="header-center">
+                <div class="header-search header-search-extended header-search-visible d-none d-lg-block">
+                    @*<a asp-action="FindSanPham" asp-route-input="value" class="search-toggle" role="button"><i class="icon-search"></i></a>*@
+                    @*<form asp-action="SearchProduct" asp-controller="Home">*@
+                    @using(Html.BeginForm("SearchProduct", "Home"))
+                    {
+                        <div class="header-search-wrapper search-wrapper-wide">
+                            <label for="productName" class="sr-only">Search</label>
+                            <button class="btn btn-primary"><i class="icon-search"></i></button>
+                            <input type="text" class="form-control" name="strSearch" placeholder="Search product ...">
+                        </div>
+                        <!-- End .header-search-wrapper -->
+                    }
+                    
+                    @*</form>*@
+                </div><!-- End .header-search -->
+            </div>
+
+            <div class="header-right">
+                <div class="wishlist">
+                    <a href="wishlist.html" title="Wishlist">
+                        <div class="icon">
+                            <i class="icon-heart-o"></i>
+                            @*<span class="wishlist-count badge">0</span>*@
+                        </div>
+                        <p>Wishlist</p>
+                    </a>
+                </div>
+
+                <div class="dropdown cart-dropdown">
+                    <a asp-action="Cart" class="dropdown-toggle" role="button" aria-haspopup="true" aria-expanded="false" data-display="static">
+                        <div class="icon">
+                            <i class="icon-shopping-cart"></i>
+                            @*<span class="cart-count">0</span>*@
+                        </div>
+                        <p>Cart</p>
+                    </a>
+                </div><!-- End .cart-dropdown -->
+            </div><!-- End .header-right -->
+        </div><!-- End .container -->
+    </div><!-- End .header-middle -->
+
+    <div class="header-bottom sticky-header">
+        <div class="container">
+            <div class="header-center">
+                <nav class="main-nav">
+                    <ul class="menu sf-arrows">
+                        <li class="megamenu-container active">
+                            <a href="#" class="">Homepage</a>
+                        </li>
+                        <li>
+                            <a href="#" class="sf-with-ul">Brand</a>
+                            <div class="megamenu megamenu-sm">
+                                <div class="row no-gutters">
+                                    <div class="col-md-6">
+                                        <div class="menu-col">
+                                            <div class="menu-title">List of Brands:</div><!-- End .menu-title -->
+                                            @await Component.InvokeAsync("BrandMenu")
+                                        </div><!-- End .menu-col -->
+                                    </div><!-- End .col-md-6 -->
+
+                                    <div class="col-md-6">
+                                        <div class="banner banner-overlay">
+                                            <a href="category.html">
+                                                <img src="../img/brand_banner.jpg" alt="Banner">
+
+                                                <div class="banner-content banner-content-bottom">
+                                                    <div class="banner-title text-white">List of<br><span><strong>Brands</strong></span></div><!-- End .banner-title -->
+                                                </div><!-- End .banner-content -->
+                                            </a>
+                                        </div><!-- End .banner -->
+                                    </div><!-- End .col-md-6 -->
+                                </div><!-- End .row -->
+                            </div><!-- End .megamenu megamenu-sm -->
+
+                        </li>
+                        <li>
+                            <a href="#" class="sf-with-ul">Products</a>
+                            <ul>
+                                <li>
+                                    <a href ="#" class="sf-with-ul">RAM</a>
+                                    <ul>
+                                        <li><a asp-action="SanPhamTheoRAM" asp-route-ram="4GB">4GB</a></li>
+                                        <li><a asp-action="SanPhamTheoRAM" asp-route-ram="6GB">6GB</a></li>
+                                        <li><a asp-action="SanPhamTheoRAM" asp-route-ram="8GB">8GB</a></li>
+                                        <li><a asp-action="SanPhamTheoRAM" asp-route-ram="16GB">16GB</a></li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <a href ="#" class="sf-with-ul">ROM (Internal Memory)</a>
+                                    <ul>
+                                        <li><a asp-action="SanPhamTheoROM" asp-route-rom="16GB">16GB</a></li>
+                                        <li><a asp-action="SanPhamTheoROM" asp-route-rom="32GB">32GB</a></li>
+                                        <li><a asp-action="SanPhamTheoROM" asp-route-rom="64GB">64GB</a></li>
+                                        <li><a asp-action="SanPhamTheoROM" asp-route-rom="128GB">128GB</a></li>
+                                        <li><a asp-action="SanPhamTheoROM" asp-route-rom="256GB">256GB</a></li>
+                                        <li><a asp-action="SanPhamTheoROM" asp-route-rom="512GB">512GB</a></li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <a href ="#" class="sf-with-ul">Price</a>
+                                    <ul>
+                                        <li><a asp-action="SanPhamTheoPrice" asp-route-tien1="0" asp-route-tien2="5000000"> Below 5.000.000</a></li>
+                                        <li><a asp-action="SanPhamTheoPrice" asp-route-tien1="5000000" asp-route-tien2="8000000"> 5.000.000 - 8.000.000</a></li>
+                                        <li><a asp-action="SanPhamTheoPrice" asp-route-tien1="8000000" asp-route-tien2="10000000"> 8.000.000 - 10.000.000</a></li>
+                                        <li><a asp-action="SanPhamTheoPrice" asp-route-tien1="10000000" asp-route-tien2="20000000"> 10.000.000 - 20.000.000</a></li>
+                                        <li><a asp-action="SanPhamTheoPrice" asp-route-tien1="20000000" asp-route-tien2="50000000"> Above 20.000.000</a></li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <a href="#" class="sf-with-ul">OS</a>
+                                    <ul>
+                                        <li><a asp-action="SanPhamTheoOS" asp-route-os="IOS">IOS</a></li>
+                                        <li><a asp-action="SanPhamTheoOS" asp-route-os="Android">Android</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a asp-action="Contact">Contact</a>
+                        </li>
+                        <li>
+                            <a asp-action="About">About Us</a>
+                        </li>
+                        <li>
+                            <a >User</a>
+                        </li>
+                    </ul><!-- End .menu -->
+                </nav><!-- End .main-nav -->
+            </div><!-- End .header-center -->
+
+            <div class="header-right">
+                <i class="la la-lightbulb-o"></i>
+            </div>
+        </div><!-- End .container -->
+    </div><!-- End .header-bottom -->
+</header><!-- End .header -->
+
+@*@section Script{
+<script>
+    function FindByName() {
+        var ulink = "https://localhost:7097/api/searchapi/";
+        var productName1 = $document.getElementById("productName").value;
+        var newname = productName1.slice(1);
+        var str = '';
+        var getUrl = ulink + productName1;
+        alert(getUrl);
+        $.ajax({
+            type: 'GET',
+            url: getUrl,
+            dataType: 'json',
+            success: function (data) {
+                    alert(url);
+                    $.each(data, function (key, val) {
+                        str += `
+                                <figure class="product-media">
+                                    <a asp-controller="Home" asp-action="ChiTietSanPham" asp-route-maDienThoai="${val.madienthoai}">
+                                                <img src="../img/"${val.anh})" alt="Product image" class="product-image" style='width: 500px; height: 300px'>
+                                    </a>
+
+                                    <div class="product-action-vertical">
+                                        <a href="#" class="btn-product-icon btn-wishlist btn-expandable"><span>add to wishlist</span></a>
+                                    </div><!-- End .product-action -->
+
+                                    <div class="product-action action-icon-top">
+                                        <a class="btn-product btn-cart"><span>add to cart</span></a>
+                                        <a href="popup/quickView.html" class="btn-product btn-quickview" title="Quick view"><span>quick view</span></a>
+                                    </div><!-- End .product-action -->
+                                </figure><!-- End .product-media -->
+
+                                <div class="product-body">
+                                    <div class="product-cat">
+                                        <a href="#"> ${val.mahsx} </a>
+                                    </div><!-- End .product-cat -->
+                                    <h3 class="product-title"><a href="product.html"> ${val.tendienthoai} </a></h3><!-- End .product-title -->
+                                    <div class="product-price"> ${val.giaban} đ</div><!-- End .product-price -->
+                                    <div class="ratings-container">
+                                        <div class="ratings">
+                                            <div class="ratings-val" style="width: 0%;"></div><!-- End .ratings-val -->
+                                        </div><!-- End .ratings -->
+                                        <span class="ratings-text">( 0 Reviews )</span>
+                                    </div><!-- End .rating-container -->
+                                </div><!-- End .product-body -->`;
+                    });
+                    $('#displayProduct').html(str);
+
+            },
+            Error: function (xhr) {
+                    alert(url);
+                alert(xhr.responseText)
+            }
+        });
+    }
+</script>*@
+
+@*<div id="top-bar" class="container">
+	<div class="row">
+		<div class="span4">
+				<input type="text" id="name"/>
+                <button onclick="FindByName()"> Ấn </button>
+			
+		</div>
+		<div class="span8">
+			<div class="account pull-right">
+				<ul class="user-menu">
+					<li><a href="#">My Account</a></li>
+					<li><a href="cart.html">Your Cart</a></li>
+					<li><a href="checkout.html">Checkout</a></li>
+					<li><a href="register.html">Login</a></li>
+				</ul>
+			</div>
+		</div>
+	</div>
+</div>
+<script>
+	function FindByName(){
+        var name = document.getElementById("name").value;
+        alert(name);
+        var str = '';
+        var getUrl = "https://localhost:7213/api/cauthu/ct/"+name;
+        $.ajax({
+            type: 'GET',
+            url: getUrl,
+            dataType: 'json',
+            success: function (data) {
+                $.each(data, function (key, val) {
+                    str += `<li class="span3"><div class="product-box">
+                        <span class="sale_tag"> </span><p> <a href="product_detail.html" > <img src = "`;
+                    var linkImage = "../images/" + $.trim(val.anh);
+                    str += linkImage;
+                    str += `"alt = "" > </a></p>
+                        <a href="product_detail.html" class="title" >`;
+                    str += $.trim(val.hoVaTen);
+                    str += </a><br><a href = "products.html" class="category" >;
+                    str += $.trim(val.CauLacBo);
+                    str += </a></div> </li>
+                });
+                $('#displayCauThu').html(str);
+            },
+            Error: function (xhr) {
+                alert(xhr.responseText)
+            }
+        });
+	}
+</script>
+}*@

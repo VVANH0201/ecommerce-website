@@ -1,0 +1,27 @@
+﻿@using BTL.Models
+@model List<KhachHang>
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+
+@foreach (var item in Model)
+{
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.TenKhachHang)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.NgaySinh)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.SoDienThoai)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DiaChi)
+        </td>
+
+@*        <td>
+            <a class=" btn btn-sm btn-success" asp-controller="Admin" asp-action="SuaKH" asp-route-MaKhachHang="@item.MaKhachHang">Sửa</a>
+            <a class=" btn btn-sm btn-primary" asp-controller="Admin" asp-action="ChiTietKH" asp-route-MaKhachHang="@item.MaKhachHang">Chi tiết</a>
+            <a class="btn btn-sm btn-danger" asp-controller="Admin" asp-action="XoaKH" asp-route-MaKhachHang="@item.MaKhachHang">Xóa</a>
+        </td>
+*@    </tr>
+}

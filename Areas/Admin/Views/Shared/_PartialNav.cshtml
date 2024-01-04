@@ -1,0 +1,72 @@
+﻿@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+<nav class="sidebar sidebar-offcanvas" id="sidebar">
+    <ul class="nav">
+
+        <li class="nav-item sidebar-category">
+            <p>Danh Mục</p>
+            <span></span>
+        </li>
+        <li class="nav-item active">
+            <a class="nav-link" asp-area="Admin" asp-controller="HomeAdmin" asp-action="Index">
+                <i class="mdi mdi-view-quilt menu-icon"></i>
+                <span class="menu-title">Dashboard</span>
+
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" data-bs-toggle="collapse" href="#ui-basic5" aria-expanded="false" aria-controls="ui-basic5">
+                <i class="mdi mdi-cellphone menu-icon"></i>
+                <span class="menu-title">Quản lý Sản Phẩm</span>
+                <i class="menu-arrow"></i>
+            </a>
+            <div class="collapse" id="ui-basic5">
+                <ul class="nav flex-column sub-menu">
+                    <li class="nav-item"> <a class="nav-link" asp-area="Admin" asp-controller="HomeAdmin" asp-action="DanhMucSanPham">Quản Lý Điện Thoại</a></li>
+                    <li class="nav-item"> <a class="nav-link" asp-area="Admin" asp-controller="HomeAdmin" asp-action="DanhMucHSX">Quản Lý Hãng Sản Xuất</a></li>
+                </ul>
+            </div>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" class="nav-link" asp-area="Admin" asp-controller="HomeAdmin" asp-action="DanhMucNhanVien">
+                <i class="mdi mdi-account-box menu-icon"></i>
+                <span class="menu-title">Quản lý Nhân Viên</span>
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" asp-area="Admin" asp-controller="HomeAdmin" asp-action="DanhMucKH">
+                <i class="mdi mdi-account-multiple menu-icon"></i>
+                <span class="menu-title"> Quản Lý Khách Hàng</span>
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" data-bs-toggle="collapse" href="#ui-basic1" aria-expanded="false" aria-controls="ui-basic1">
+                <i class="mdi mdi-format-list-bulleted menu-icon"></i>
+                <span class="menu-title">Quản lý Hóa Đơn</span>
+                <i class="menu-arrow"></i>
+            </a>
+            <div class="collapse" id="ui-basic1">
+                <ul class="nav flex-column sub-menu">
+                    <li class="nav-item"> <a class="nav-link" asp-area="Admin" asp-controller="HomeAdmin" asp-action="DanhMucHDX">Quản Lý Hóa Đơn Xuất</a></li>
+                    @*<li class="nav-item"> <a class="nav-link" asp-area="Admin" asp-controller="HomeAdmin" asp-action="DanhMucHSX">Quản Lý Hãng Sản Xuất</a></li>*@
+                </ul>
+            </div>
+        </li>
+
+        <li class="nav-item">
+            <a class="nav-link" data-bs-toggle="collapse" href="#ui-basic2" aria-expanded="false" aria-controls="ui-basic2">
+                <i class="mdi mdi-account menu-icon"></i>
+                <span class="menu-title">Quản lý Tài Khoản</span>
+                <i class="menu-arrow"></i>
+            </a>
+            <div class="collapse" id="ui-basic2">
+                <ul class="nav flex-column sub-menu">
+                    <li class="nav-item"> <a class="nav-link" asp-area="Admin" asp-controller="HomeAdmin" asp-action="DanhMucTK">Tài Khoản Nhân Viên</a></li>
+                    <li class="nav-item"> <a class="nav-link" asp-area="Admin" asp-controller="HomeAdmin" asp-action="DanhMucTKKH">Tài Khoản Khách Hàng</a></li>
+
+                    @*<li class="nav-item"> <a class="nav-link" asp-area="Admin" asp-controller="HomeAdmin" asp-action="DanhMucHSX">Quản Lý Hãng Sản Xuất</a></li>*@
+                </ul>
+            </div>
+        </li>
+
+    </ul>
+</nav>

@@ -1,0 +1,49 @@
+﻿@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@model BTL.Models.HangSanXuat
+
+@{
+    ViewData["Title"] = "SuaHSX";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+<div class="col-12 grid-margin stretch-card">
+    <div class="card">
+        <div class="card-body">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <form method="post" asp-action="SuaHSX" class="forms-sample" enctype="multipart/form-data">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <input type="hidden" asp-for="MaHsx" />
+                <div class="form-group">
+                    <label asp-for="TenHsx" class="control-label"></label>
+                    <input asp-for="TenHsx" class="form-control" />
+                    <span asp-validation-for="TenHsx" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <input type="submit" value="Create" class="btn btn-primary" />
+                </div>
+                <a class="btn btn-light" asp-area="Admin" asp-controller="HomeAdmin" asp-action="DanhMucHSX">Cancel</a>
+                
+            </form>
+        </div>
+    </div>
+</div>
+@*<div class="row">
+    <div class="col-md-4">
+        <form asp-action="SuaHSX">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="MaHsx" />
+            <div class="form-group">
+                <label asp-for="TenHsx" class="control-label"></label>
+                <input asp-for="TenHsx" class="form-control" />
+                <span asp-validation-for="TenHsx" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>*@
+
+<div>
+    <a class="btn btn-info" asp-action="DanhMucHSX">Quay Lại</a>
+</div>
+

@@ -1,0 +1,37 @@
+﻿@{
+    ViewData["Title"] = "DienThoaiBanner";
+    Layout = "~/Views/Shared/_LayoutMain.cshtml";
+}
+
+@model List<DienThoai>
+
+<div class="page-header text-center" style="background-image: url('../molla/images/page-header-bg.jpg')">
+    <div class="container">
+        <h1 class="page-title">
+            <h4> Product Filtered by </h4>
+            <span> @ViewBag.Hsx </span>
+        </h1>
+    </div><!-- End .container -->
+</div><!-- End .page-header -->
+<nav aria-label="breadcrumb" class="breadcrumb-nav mb-2">
+    <div class="container">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a asp-action="Index">Home</a></li>
+            <li class="breadcrumb-item"><a asp-action="SanPhamTheoHSX" asp-route-maHsx=""></a></li>
+        </ol>
+    </div><!-- End .container -->
+</nav><!-- End .breadcrumb-nav -->
+<div class="container">
+    @await Html.PartialAsync("_PartialFilter")
+    <div class="row">
+        @foreach (var item in Model)
+        {
+                    <div class="col-6 col-md-4 col-lg-4 col-xl-3">
+                        <div class="product">
+                    @await Html.PartialAsync("_PartialSanPham", item)
+                        </div><!-- End .product -->
+                    </div>
+                    <!-- End .col-sm-6 col-lg-4 col-xl-3 -->
+        }
+    </div>
+</div>

@@ -1,0 +1,281 @@
+﻿
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+
+<div class="content-wrapper">
+    <div class="row">
+        <div class="col-md-4 grid-margin stretch-card">
+            <div class="card bg-facebook d-flex align-items-center">
+                <div class="card-body py-5">
+                    <div class="d-flex flex-row align-items-center flex-wrap justify-content-md-center justify-content-xl-start py-1">
+                        <i class="mdi mdi-cellphone menu-icon icon-lg"></i>
+                        <div class="ms-3 ml-md-0 ml-xl-3">
+                            <h5 class="text-white font-weight-bold"> Điện Thoại</h5>
+                            <h5 id="sl" class="text-white font-weight-bold"></h5>
+
+                            <a class="btn btn-info btn-rounded btn-fw" asp-area="Admin" asp-controller="HomeAdmin" asp-action="DanhMucSanPham">Xem Thêm</a>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 grid-margin stretch-card">
+            <div class="card bg-google d-flex align-items-center">
+                <div class="card-body py-5">
+                    <div class="d-flex flex-row align-items-center flex-wrap justify-content-md-center justify-content-xl-start py-1">
+                        <i class="mdi mdi-account-box menu-icon text-white icon-lg"></i>
+                        <div class="ms-3 ml-md-0 ml-xl-3">
+                            <h5 class="text-white font-weight-bold"> Nhân Viên</h5>
+                            <h5 id="slnv" class="text-white font-weight-bold"></h5>
+                            <a class="btn btn-info btn-rounded btn-fw" asp-area="Admin" asp-controller="HomeAdmin" asp-action="DanhMucNhanVien">Xem Thêm</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 grid-margin stretch-card">
+            <div class="card bg-twitter d-flex align-items-center">
+                <div class="card-body py-5">
+                    <div class="d-flex flex-row align-items-center flex-wrap justify-content-md-center justify-content-xl-start py-1">
+                        <i class="mdi mdi-account-multiple menu-icon text-white icon-lg"></i>
+                        <div class="ms-3 ml-md-0 ml-xl-3">
+                            <h5 class="text-white font-weight-bold"> Hóa Đơn Bán</h5>
+                            <h5 id="slhdb" class="text-white font-weight-bold"></h5>
+                            <a class="btn btn-info btn-rounded btn-fw" asp-area="Admin" asp-controller="HomeAdmin" asp-action="DanhMucHDX">Xem Thêm</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6" ">
+            <h3 class=" font-weight-bold"> Thống kê theo Hãng sản xuất</h3>
+            <canvas id="myChart" style="max-width: 450px; max-height: 400px"></canvas>
+
+        </div>
+        <div class="col-md-6 ">
+            <h3 class=" font-weight-bold"> Thống kê theo Doanh thu</h3>
+            <select name="cars" id="year" onchange="YearChanged(this)">
+                <option value="2023">2023</option>
+                <option value="2022">2022</option>
+                <option value="2021">2021</option>
+                <option value="2020">2020</option>
+            </select>
+            <canvas id="myChart1" style="max-width: 450px; max-height: 400px"></canvas>
+        </div>
+
+    </div>
+</div>
+@section Script{
+<script>
+    function YearChanged(obj) {
+        var value = obj.value;
+        $.ajax({
+            url: 'https://localhost:7229/api/BaoCaoAPI/TkeTheoThang?Nam=' + value,
+            datatype: "json",
+            type: "GET",
+            success: function (results) {
+
+                var _results = results;
+                var _labels = _results[0];
+                var _datasets = _results[1];
+                //var _coler = ["red", "green", "blue", "brown", "purple", "organe"];
+
+
+                new Chart('myChart1', {
+                    type: 'bar',
+                    data: {
+                        labels: _labels,
+                        datasets: [{
+                            label: 'Doanh Thu',
+                            data: _datasets,
+                            backgroundColor: [
+                                'rgba(255, 99, 132, 0.2)',
+                                'rgba(255, 159, 64, 0.2)',
+                                'rgba(255, 205, 86, 0.2)',
+                                'rgba(75, 192, 192, 0.2)',
+                                'rgba(54, 162, 235, 0.2)',
+                                'rgba(153, 102, 255, 0.2)',
+                                'rgba(201, 203, 207, 0.2)'
+                            ],
+                            borderColor: [
+                                'rgb(255, 99, 132)',
+                                'rgb(255, 159, 64)',
+                                'rgb(255, 205, 86)',
+                                'rgb(75, 192, 192)',
+                                'rgb(54, 162, 235)',
+                                'rgb(153, 102, 255)',
+                                'rgb(201, 203, 207)'
+                            ],
+                            borderWidth: 1
+                        }]
+                    },
+                    options: {
+                        scales: {
+                            y: {
+                                beginAtZero: true
+                            }
+                        }
+                    }
+                });
+
+            },
+            error: function (xhr) {
+                alert('error');
+            }
+        });
+
+    }
+    $(document).ready(function () {
+        var Url = 'https://localhost:7229/api/BaoCaoAPI/GetSLDT';
+        var UrlNV = 'https://localhost:7229/api/BaoCaoAPI/GetSLNhanVien';
+        var UrlHDX = 'https://localhost:7229/api/BaoCaoAPI/GetSLHoaDon';
+        var UrlTK = 'https://localhost:7229/api/BaoCaoAPI/TkeTheoLoai';
+        var UrlTK1 = 'https://localhost:7229/api/BaoCaoAPI/TkeTheoThang?Nam=2023';
+        var UrlTKchose = 'https://localhost:7229/api/BaoCaoAPI/TkeTheoThang';
+        var s = '';
+
+
+
+        $.ajax({
+            url: UrlTK,
+            datatype: "json",
+            type: "GET",
+            success: function (results) {
+
+                var _results = results;
+                var _labels = _results[0];
+                var _datasets = _results[1];
+                var _coler = ["red", "green", "blue", "brown", "purple", "organe"];
+
+
+                new Chart('myChart', {
+                    type: 'pie',
+                    data: {
+                        labels: _labels,
+                        datasets: [{
+                            label: 'Số Lượng',
+                            data: _datasets,
+                            backgroundColor: _coler,
+                            borderWidth: 1
+                        }]
+                    },
+                    options: {
+                        scales: {
+                            y: {
+                                beginAtZero: true
+                            }
+                        }
+                    }
+                });
+
+            },
+            error: function (xhr) {
+                alert('error');
+            }
+        });
+        $.ajax({
+            url: UrlTK1,
+            datatype: "json",
+            type: "GET",
+            success: function (results) {
+
+                var _results = results;
+                var _labels = _results[0];
+                var _datasets = _results[1];
+                //var _coler = ["red", "green", "blue", "brown", "purple", "organe"];
+
+
+                new Chart('myChart1', {
+                    type: 'bar',
+                    data: {
+                        labels: _labels,
+                        datasets: [{
+                            label: 'Doanh Thu',
+                            data: _datasets,
+                            backgroundColor: [
+                                'rgba(255, 99, 132, 0.2)',
+                                'rgba(255, 159, 64, 0.2)',
+                                'rgba(255, 205, 86, 0.2)',
+                                'rgba(75, 192, 192, 0.2)',
+                                'rgba(54, 162, 235, 0.2)',
+                                'rgba(153, 102, 255, 0.2)',
+                                'rgba(201, 203, 207, 0.2)'
+                            ],
+                            borderColor: [
+                                'rgb(255, 99, 132)',
+                                'rgb(255, 159, 64)',
+                                'rgb(255, 205, 86)',
+                                'rgb(75, 192, 192)',
+                                'rgb(54, 162, 235)',
+                                'rgb(153, 102, 255)',
+                                'rgb(201, 203, 207)'
+                            ],
+                            borderWidth: 1
+                        }]
+                    },
+                    options: {
+                        scales: {
+                            y: {
+                                beginAtZero: true
+                            }
+                        }
+                    }
+                });
+
+            },
+            error: function (xhr) {
+                alert('error');
+            }
+        });
+
+
+
+        $.ajax({
+            url: Url,
+            datatype: "json",
+            type: "GET",
+            success: function (results) {
+
+                $('#sl').html(results);
+            },
+            error: function (xhr) {
+                alert('error');
+            }
+        });
+
+        $.ajax({
+            url: UrlNV,
+            datatype: "json",
+            type: "GET",
+            success: function (results) {
+
+                $('#slnv').html(results);
+            },
+            error: function (xhr) {
+                alert('error');
+            }
+        });
+
+        $.ajax({
+            url: UrlHDX,
+            datatype: "json",
+            type: "GET",
+            success: function (results) {
+
+                $('#slhdb').html(results);
+            },
+            error: function (xhr) {
+                alert('error');
+            }
+        });
+
+    });
+
+</script>
+}

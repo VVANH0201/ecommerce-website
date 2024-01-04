@@ -1,0 +1,43 @@
+﻿@model DienThoai
+
+@{
+    var ur = "https://localhost:7229/api/cartapi?mahang=" + Model.MaDienThoai + "&quatity=" + 1;
+}
+
+<figure class="product-media">
+    <a asp-controller="Home" asp-action="ChiTietSanPham" asp-route-maDienThoai="@Model.MaDienThoai">
+        <img src="@Url.Content("../img/"+Model.Anh)" alt="Product image" class="product-image" style='width: 500px; height: 300px'>
+    </a>
+
+    <div class="product-action-vertical">
+        <a href="#" class="btn-product-icon btn-wishlist btn-expandable"><span>add to wishlist</span></a>
+    </div><!-- End .product-action -->
+
+    <div class="product-action action-icon-top">
+        <a onclick="addToCart('@ur')" class="btn-product btn-cart"><span>add to cart</span></a>
+    </div><!-- End .product-action -->
+</figure><!-- End .product-media -->
+
+<div class="product-body">
+    <div class="product-cat">
+        <a asp-asp-controller="Home" asp-action="SanPhamTheoHSX" asp-route-maHsx="@Model.MaHsx">@Model.MaHsxNavigation.TenHsx</a>
+    </div><!-- End .product-cat -->
+    <h3 class="product-title"><a asp-controller="Home" asp-action="ChiTietSanPham" asp-route-maDienThoai="@Model.MaDienThoai">@Model.TenDienThoai</a></h3><!-- End .product-title -->
+    <div class="product-price">@Model.GiaBan đ</div><!-- End .product-price -->
+</div><!-- End .product-body -->
+
+<script>
+    function addToCart(getUrl) {
+        $.ajax({
+            type: 'Post',
+            url: getUrl,
+            dataType: 'json',
+            success: function (data) {
+                alert("Thêm thành công!")
+            },
+            Error: function (xhr) {
+                alert(xhr.responseText)
+            }
+        });
+    }
+</script>
